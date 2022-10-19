@@ -29,6 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Vite](https://vitejs.dev/)
 - [iMask](https://imask.js.org)
 - [Figma](https://www.figma.com/file/vs7od896IyR8J7thzLZbvf/Explorer-Lab-%2301?node-id=3%3A1165)
+- [iMask](https://imask.js.org/)
 
 ## 📝 License
 
