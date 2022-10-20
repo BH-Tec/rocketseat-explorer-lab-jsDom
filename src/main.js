@@ -15,7 +15,11 @@ function setCardType(type) {
     amex: ["#244FEA", "#8F00FF", "#292D98"],
     elo: ["#C95C49", "#FFCB05", "#C95C49"],
     hipercard: ["#822124", "#D7474E", "#D7474E"],
-    default: ["black", "gray", "black"],
+    diners: ["", "blue", "silver"],
+    discover: ["", "", "orange"],
+    jcb: ["", "", "gold"],
+    maestro: ["", "", "blue"],
+    default: ["gold", "silver", "black"],
   }
   ccBgColor01.setAttribute("fill", colors[type][0])
   ccBgColor02.setAttribute("fill", colors[type][1])
