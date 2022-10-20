@@ -3,19 +3,23 @@ import IMask from "imask"
 
 const ccBgColor01 = document.querySelector(".cc-bg svg > g g:nth-child(1) path")
 const ccBgColor02 = document.querySelector(".cc-bg svg > g g:nth-child(2) path")
+const ccBg = document.querySelector(".cc")
 const ccLogo = document.querySelector(".cc-logo span:nth-child(2) img")
 
 function setCardType(type) {
   const colors = {
-    bruno: ["green", "red"],
-    visa: ["#436d99", "#2d57f2"],
-    mastercard: ["#df6f29", "#c69347"],
-    cielo: ["#00aeef", "#5a646e"],
-    default: ["black", "gray"],
+    bruno: ["white", "red", "green"],
+    visa: ["#436d99", "#2d57f2", "#07051B"],
+    mastercard: ["#df6f29", "#c69347", "#FF3C21"],
+    cielo: ["#ffffff", "#5a646e", "#00aeef"],
+    amex: ["#244FEA", "#8F00FF", "#292D98"],
+    default: ["black", "gray", "black"],
   }
   ccBgColor01.setAttribute("fill", colors[type][0])
   ccBgColor02.setAttribute("fill", colors[type][1])
   ccLogo.setAttribute("src", `cc-${type}.svg`)
+  ccBg.style.backgroundColor = colors[type][2]
+  ccBg.style.borderRadius = "20px"
 }
 
 setCardType("bruno")
@@ -66,7 +70,7 @@ const cardNumberPattern = {
     {
       mask: "0000 000000 00000",
       regex: /^3[47]\d{0,13}/,
-      cardtype: "american express",
+      cardtype: "amex",
     },
     {
       mask: "0000 0000 0000 0000",
@@ -114,6 +118,7 @@ const cardNumberPattern = {
 }
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
 
+// ação de click no button
 const addButton = document
   .querySelector("#add-card")
   .addEventListener("click", () => {
@@ -124,6 +129,7 @@ document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault()
 })
 
+// função para alterar o nome do cartão
 const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
   const ccHolder = document.querySelector(".cc-holder .value")
@@ -132,6 +138,7 @@ cardHolder.addEventListener("input", () => {
     cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
 })
 
+// função para alterar o cvc
 securityCodeMasked.on("accept", () => {
   updateSecurityCode(securityCodeMasked.value)
 })
@@ -141,6 +148,7 @@ function updateSecurityCode(code) {
   ccSecurity.innerText = code.length === 0 ? "123" : code
 }
 
+// função para alterar o número
 cardNumberMasked.on("accept", () => {
   const cardType = cardNumberMasked.masked.currentMask.cardtype
   setCardType(cardType)
@@ -152,6 +160,7 @@ function updateCardNumber(number) {
   ccNumber.innerText = number.length === 0 ? "1234 5678 9012 3456" : number
 }
 
+// função para alterar a data de expiração
 expirationDateMasked.on("accept", () => {
   updateExpirationDate(expirationDateMasked.value)
 })
